@@ -1,0 +1,21 @@
+<!Doctype html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sites List</title>
+    </head>
+    <body>
+        <div>
+            <table>
+                <thead>Sites Links</thead>
+                <tbody>
+                    <ul style="list-style-type:none">
+                        {{#sitesLink}}
+                            <li>{{urlString}} <a href="/today_news/{{urlKey}}">Show Today News</a></li>
+                        {{/sitesLink}}
+                    </ul>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

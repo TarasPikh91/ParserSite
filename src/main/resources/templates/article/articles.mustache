@@ -1,0 +1,18 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+</head>
+<body>
+{{#articles}}
+    <div>{{content}}</div>
+        <span>Comments:</span>
+        {{#comments}}
+            <div>{{content}}</div>
+        {{/comments}}
+        <a href="/add_comment/{{id}}">Add Comment</a>
+        <a href="/edit/{{id}}">Edit</a>
+        <a href="/delete/{{id}}">Delete</a>
+{{/articles}}
+</body>
+</html>

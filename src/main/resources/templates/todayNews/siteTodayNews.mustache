@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Today news</title>
+        <style>
+            .newsColumn {
+                border: 1px solid #a7b3d6;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <td>Today News</td>
+                </tr>
+                <tr>
+                    <td><a href="/sites">Go back</a></td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#newsContent}}
+                    <tr>
+                        <td class="newsColumn">{{.}}</td>
+                    </tr>
+                {{/newsContent}}
+            </tbody>
+        </table>
+    </body>
+</html>
+

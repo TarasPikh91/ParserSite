@@ -1,0 +1,17 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Comment</title>
+</head>
+<body>
+    <div>
+        {{article.content}}
+    </div>
+    <br/>
+    <span>Comment:</span>
+<form method="post" action="/save_comment/{{article.id}}">
+    <input type="text" name="content"/><br/>
+    <input type="submit"/>
+</form>
+</body>
+</html>
