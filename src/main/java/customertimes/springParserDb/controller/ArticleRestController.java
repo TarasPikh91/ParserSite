@@ -5,6 +5,10 @@ import customertimes.springParserDb.dao.Article;
 import customertimes.springParserDb.dao.Comment;
 import customertimes.springParserDb.dto.ArticleDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +23,9 @@ public class ArticleRestController {
 
 
     @GetMapping
-    public List<ArticleDto> getList(Model model) {
-        return articleApp.getArticles();
+    public List<ArticleDto> getList(Model model,
+                                    @PageableDefault Pageable pageable) {
+        return articleApp.getArticles(pageable).getContent();
     }
 
     @GetMapping("/{id}")

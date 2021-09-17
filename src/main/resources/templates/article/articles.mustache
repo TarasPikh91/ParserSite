@@ -4,7 +4,7 @@
     <title>Articles</title>
 </head>
 <body>
-{{#articles}}
+{{#articlePage.content}}
     <div>{{content}}</div>
         <span>Comments:</span>
         {{#comments}}
@@ -13,6 +13,14 @@
         <a href="/add_comment/{{id}}">Add Comment</a>
         <a href="/edit/{{id}}">Edit</a>
         <a href="/delete/{{id}}">Delete</a>
-{{/articles}}
+{{/articlePage.content}}
+
+<div>
+    <ul>
+        {{#numbers}}
+            <li><a href="/articles/{{.}}">{{.}}</a></li>
+        {{/numbers}}
+    </ul>
+</div>
 </body>
 </html>

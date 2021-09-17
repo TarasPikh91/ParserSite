@@ -36,13 +36,13 @@ public class SitesController {
 
     @GetMapping("/")
     public String getMainPage() {
-        return "main";
+        return "todayNews/main";
     }
 
     @GetMapping("/sites")
     public String getSitesList(Model model) {
         model.addAttribute("sitesLink", sitesUrl.getSitesURL());
-        return "sites";
+        return "todayNews/sites";
     }
 
     @GetMapping("/today_news/{urlKey}")
@@ -57,6 +57,6 @@ public class SitesController {
         }
 
         model.addAttribute("newsContent", todayNewsApp.getTodayNewsFromBase(siteUrl));
-        return "siteTodayNews";
+        return "todayNews/siteTodayNews";
     }
 }

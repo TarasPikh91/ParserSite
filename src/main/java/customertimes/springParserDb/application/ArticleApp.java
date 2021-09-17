@@ -4,6 +4,8 @@ import customertimes.springParserDb.dao.Article;
 import customertimes.springParserDb.dto.ArticleDto;
 import customertimes.springParserDb.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +25,8 @@ public class ArticleApp {
         return articleRepository.save(new Article(article)).getId();
     }
 
-    public List<ArticleDto> getArticles() {
-        return articleRepository.findAll().stream().map(Article::convertDto).collect(Collectors.toList());
+    public Page getArticles(Pageable pageable) {
+        return (Page) articleRepository.findAll(pageable); //.stream().map(Article::convertDto).collect(Collectors.toList());
     }
 
     public ArticleDto getArticle(final Long id) {
