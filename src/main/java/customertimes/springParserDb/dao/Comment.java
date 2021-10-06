@@ -43,7 +43,7 @@ public class Comment {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -51,7 +51,7 @@ public class Comment {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(final String content) {
         this.content = content;
     }
 
@@ -59,7 +59,7 @@ public class Comment {
         return article;
     }
 
-    public void setArticle(Article article) {
+    public void setArticle(final Article article) {
         this.article = article;
     }
 }

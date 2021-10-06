@@ -31,7 +31,7 @@ public class TodayNews {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -39,7 +39,7 @@ public class TodayNews {
         return siteKey;
     }
 
-    public void setSiteKey(String siteKey) {
+    public void setSiteKey(final String siteKey) {
         this.siteKey = siteKey;
     }
 
@@ -47,7 +47,7 @@ public class TodayNews {
         return newsDate;
     }
 
-    public void setNewsDate(String newsDate) {
+    public void setNewsDate(final String newsDate) {
         this.newsDate = newsDate;
     }
 
@@ -55,7 +55,7 @@ public class TodayNews {
         return news;
     }
 
-    public void setNews(String news) {
+    public void setNews(final String news) {
         this.news = news;
     }
 }

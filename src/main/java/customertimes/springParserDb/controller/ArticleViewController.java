@@ -5,7 +5,6 @@ import customertimes.springParserDb.application.CommentApp;
 import customertimes.springParserDb.dao.Article;
 import customertimes.springParserDb.dao.Comment;
 import customertimes.springParserDb.dto.ArticleDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -15,14 +14,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.stream.IntStream;
 
 @Controller
-public class ArticleController {
+public class ArticleViewController {
 
-    @Autowired
-    private ArticleApp articleApp;
+    private final ArticleApp articleApp;
 
-    @Autowired
-    private CommentApp commentApp;
+    private final CommentApp commentApp;
 
+    public ArticleViewController(ArticleApp articleApp, CommentApp commentApp) {
+        this.articleApp = articleApp;
+        this.commentApp = commentApp;
+    }
+
+    // refactor to REST API
 
     @GetMapping("/create_article")
     public String createArticle() {
@@ -35,14 +38,14 @@ public class ArticleController {
 
         return "article/editArticle";
     }
-
+        //remove "save"
     @PostMapping("/save_article")
     public String saveArticle(@ModelAttribute Article article) {
         articleApp.saveArticle(article.convertDto());
         return "redirect:/articles/0";
     }
 
-    @GetMapping("/articles/{page}")
+    @GetMapping("/articles/{page}")                         // read about query parameter REST
     public String articles(Model model,
                            @PathVariable Integer page) {
         Page<Article> articlePage = articleApp.getArticles(PageRequest.of(page, 5));
@@ -74,7 +77,7 @@ public class ArticleController {
     @PostMapping("/save_comment/{id}")
     public String saveComment(@PathVariable Long id, @ModelAttribute Comment comment) {
         final ArticleDto article = articleApp.getArticle(id);
-        comment.setArticle(new Article(article));
+        comment.setArticle(new Article(article));           // move to service
         commentApp.saveComment(comment.convertDto());
         return "redirect:/articles/0";
     }

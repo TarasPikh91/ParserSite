@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Add Comment</title>
 </head>
 <body>
@@ -11,6 +11,7 @@
     <span>Comment:</span>
 <form method="post" action="/save_comment/{{article.id}}">
     <input type="text" name="content"/><br/>
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
     <input type="submit"/>
 </form>
 </body>

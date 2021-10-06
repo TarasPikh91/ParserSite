@@ -4,7 +4,6 @@ import customertimes.springParserDb.dao.TodayNews;
 import customertimes.springParserDb.domain.Url;
 import customertimes.springParserDb.repository.TodayNewsRepository;
 import customertimes.springParserDb.utils.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +15,11 @@ import java.util.Optional;
 @Transactional
 public class TodayNewsApp {
 
-    @Autowired
     private TodayNewsRepository newsRepository;
+
+    public TodayNewsApp(TodayNewsRepository newsRepository) {
+        this.newsRepository = newsRepository;
+    }
 
     public void saveTodayNews(final TodayNews todayNews) {
         newsRepository.save(todayNews);

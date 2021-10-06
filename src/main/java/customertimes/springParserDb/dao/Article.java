@@ -28,7 +28,7 @@ public class Article {
         this.comments = comments;
     }
 
-    public Article(ArticleDto articleDto) {
+    public Article(final ArticleDto articleDto) {
         this.id = articleDto.getId();
         this.content = articleDto.getContent();
         this.comments = articleDto.getComments();
@@ -42,7 +42,7 @@ public class Article {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -50,7 +50,7 @@ public class Article {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(final String content) {
         this.content = content;
     }
 
@@ -58,7 +58,7 @@ public class Article {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(final List<Comment> comments) {
         this.comments = comments;
     }
 }

@@ -7,10 +7,9 @@ import customertimes.springParserDb.domain.NewsData;
 import customertimes.springParserDb.domain.Url;
 import customertimes.springParserDb.domain.WebData;
 import customertimes.springParserDb.service.downloadService.DownloadService;
-import customertimes.springParserDb.service.newsGeneratorService.AbstractNewsService;
+import customertimes.springParserDb.service.newsGeneratorService.NewsServiceImpl;
 import customertimes.springParserDb.utils.SitesUrl;
 import customertimes.springParserDb.utils.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,21 +21,34 @@ import java.util.Date;
 @Controller
 public class SitesController {
 
-    @Autowired
-    private SitesUrl sitesUrl;
+    private final SitesUrl sitesUrl;
 
-    @Autowired
-    private DownloadService downloadService;
+    private final DownloadService downloadService;
 
-    @Autowired
-    private AbstractNewsService abstractNewsService;
+    private final NewsServiceImpl newsServiceImpl;
 
-    @Autowired
-    private TodayNewsApp todayNewsApp;
+    private final TodayNewsApp todayNewsApp;
+
+    public SitesController(SitesUrl sitesUrl, DownloadService downloadService, NewsServiceImpl newsServiceImpl, TodayNewsApp todayNewsApp) {
+        this.sitesUrl = sitesUrl;
+        this.downloadService = downloadService;
+        this.newsServiceImpl = newsServiceImpl;
+        this.todayNewsApp = todayNewsApp;
+    }
 
     @GetMapping("/")
+    public String getLoginPage() {
+        return "login";
+    }
+
+    @GetMapping("/login")
     public String getMainPage() {
         return "todayNews/main";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "/";
     }
 
     @GetMapping("/sites")
@@ -50,7 +62,7 @@ public class SitesController {
         final Url siteUrl = new Url(sitesUrl.getLinkByKey(urlKey), urlKey);
         if (todayNewsApp.isTodayNewsInBase(siteUrl)) {
             final WebData siteData = downloadService.download(siteUrl);
-            final NewsData todayNewsData = abstractNewsService.parseTodayNews(siteData, siteUrl);
+            final NewsData todayNewsData = newsServiceImpl.parseTodayNews(siteData, siteUrl);
 
             final TodayNews news = new TodayNews(urlKey, Utils.parseDateToString(new Date()), todayNewsData.getTodayNews());
             todayNewsApp.saveTodayNews(news);

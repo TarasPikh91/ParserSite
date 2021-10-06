@@ -7,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AbstractNewsService implements NewsService {
+public class NewsServiceImpl implements NewsService {
 
-    @Autowired
-    private OpenNetNewsServiceImpl openNetNewsService;
+    private final OpenNetNewsServiceImpl openNetNewsService;
 
-    @Autowired
-    private MirknigNewsServiceImpl mirknigNewsService;
+    private final MirknigNewsServiceImpl mirknigNewsService;
+
+    public NewsServiceImpl(OpenNetNewsServiceImpl openNetNewsService, MirknigNewsServiceImpl mirknigNewsService) {
+        this.openNetNewsService = openNetNewsService;
+        this.mirknigNewsService = mirknigNewsService;
+    }
 
     @Override
     public NewsData parseTodayNews(final WebData content, final Url url) {

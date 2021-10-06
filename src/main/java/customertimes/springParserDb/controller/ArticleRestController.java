@@ -4,9 +4,6 @@ import customertimes.springParserDb.application.ArticleApp;
 import customertimes.springParserDb.dao.Article;
 import customertimes.springParserDb.dao.Comment;
 import customertimes.springParserDb.dto.ArticleDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.ui.Model;
@@ -18,8 +15,12 @@ import java.util.List;
 @RequestMapping("/rest_articles")
 public class ArticleRestController {
 
-    @Autowired
-    private ArticleApp articleApp;
+
+    final private ArticleApp articleApp;
+
+    public ArticleRestController(ArticleApp articleApp) {
+        this.articleApp = articleApp;
+    }
 
 
     @GetMapping
@@ -54,7 +55,8 @@ public class ArticleRestController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) throws Exception {
+
         articleApp.deleteArticle(id);
     }
 }

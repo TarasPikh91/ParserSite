@@ -8,7 +8,7 @@ public class CommentDto {
     private String content;
     private Article article;
 
-    public CommentDto(Long id, String content, Article article) {
+    public CommentDto(final Long id, final String content, final Article article) {
         this.id = id;
         this.content = content;
         this.article = article;
@@ -18,7 +18,7 @@ public class CommentDto {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -26,7 +26,7 @@ public class CommentDto {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(final String content) {
         this.content = content;
     }
 
@@ -34,7 +34,7 @@ public class CommentDto {
         return article;
     }
 
-    public void setArticle(Article article) {
+    public void setArticle(final Article article) {
         this.article = article;
     }
 }

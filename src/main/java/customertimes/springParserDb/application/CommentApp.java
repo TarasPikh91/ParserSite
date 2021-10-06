@@ -15,9 +15,11 @@ import java.util.Optional;
 @Transactional
 public class CommentApp {
 
-    @Autowired
-    private CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
 
+    public CommentApp(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
+    }
 
     public void saveComment(final CommentDto comment) {
         commentRepository.save(new Comment(comment));
