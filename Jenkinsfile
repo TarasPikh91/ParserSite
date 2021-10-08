@@ -1,16 +1,10 @@
-pipline {
-  agent any 
-  stages {
-    stage("build") {
-      steps {
-        echo "build the file"
-      }
+pipeline {
+    agent { docker { image 'maven:3.8.2' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn --version'
+            }
+        }
     }
-    
-    stage("test") {
-      steps {
-        echo "test the file"
-      }
-    }
-  }
 }
