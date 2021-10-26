@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest_articles")
 public class ArticleRestController {
-
 
     final private ArticleApp articleApp;
 
@@ -23,7 +21,7 @@ public class ArticleRestController {
     }
 
 
-    @GetMapping
+    @GetMapping("/articles")
     public List<ArticleDto> getList(Model model,
                                     @PageableDefault Pageable pageable) {
         return articleApp.getArticles(pageable).getContent();

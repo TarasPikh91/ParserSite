@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 import java.util.Date;
@@ -38,17 +39,17 @@ public class SitesController {
 
     @GetMapping("/")
     public String getLoginPage() {
-        return "login";
+        return "todayNews/main";
     }
 
     @GetMapping("/login")
     public String getMainPage() {
-        return "todayNews/main";
+        return "login";
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String logout() {
-        return "/";
+        return "todayNews/main";
     }
 
     @GetMapping("/sites")

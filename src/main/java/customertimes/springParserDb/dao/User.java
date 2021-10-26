@@ -9,18 +9,27 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
 
     private String password;
 
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "users_roles",
-            joinColumns = @JoinColumn(name="users_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Role> roles = new HashSet<Role>();
+    private Boolean enabled;
+
+//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+//    @CollectionTable(name = "users_roles",
+//            joinColumns = @JoinColumn(name="users_id"))
+//    @Enumerated(EnumType.STRING)
+//    private Set<Role> roles = new HashSet<Role>();
+
+//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+//    @Enumerated(EnumType.STRING)
+    @Column(name="roles")
+//    @Enumerated(EnumType.STRING)
+    private Role roles;
+//    private Set<Role> roles = new HashSet<Role>();
 
     public Long getId() {
         return id;
@@ -38,13 +47,21 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public Role getRoles() {
         return roles;
     }
 
-    public void setRoles(final Set<Role> roles) {
+    public void setRoles(Role roles) {
         this.roles = roles;
     }
+
+    //    public Set<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(final Set<Role> roles) {
+//        this.roles = roles;
+//    }
 
     public String getUsername() {
         return username;
@@ -52,6 +69,14 @@ public class User {
 
     public void setUsername(final String username) {
         this.username = username;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

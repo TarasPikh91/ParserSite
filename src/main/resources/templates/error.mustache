@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>Document</title>
+</head>
+<body>
+<h1>Error Page</h1>
+<p>Application has encountered an error. Please contact support on ...</p>
+
+
+<p>Failed URL: {{url}}</p>
+<p>Exception:  ${exception.message}</p>
+<table>
+    <ul>
+        {{#exception}}
+        <li>{{stackTrace}}</li>
+        {{/exception}}
+    </ul>
+</table>
+</body>
+</html>
+

@@ -3,6 +3,8 @@ package customertimes.springParserDb.dao;
 import customertimes.springParserDb.dto.ArticleDto;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -11,9 +13,11 @@ public class Article {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Min(10)
     private String content;
 
     @OneToMany(cascade=CascadeType.ALL)

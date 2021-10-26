@@ -2,6 +2,7 @@ package customertimes.springParserDb.application;
 
 import customertimes.springParserDb.dao.Article;
 import customertimes.springParserDb.dto.ArticleDto;
+import customertimes.springParserDb.exceptions.ArticlesNotFound;
 import customertimes.springParserDb.repository.ArticleRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,7 +53,7 @@ public class ArticleApp {
 
     private void isArticlePresent(final boolean isArticlePresent) {
         if (!isArticlePresent) {
-            throw new NoSuchElementException();
+            throw new ArticlesNotFound();
         }
     }
 }

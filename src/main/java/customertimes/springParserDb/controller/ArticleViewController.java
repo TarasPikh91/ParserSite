@@ -9,8 +9,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.stream.IntStream;
 
 @Controller
@@ -55,7 +62,7 @@ public class ArticleViewController {
     }
 
     @PostMapping("/update_article/{id}")
-    public String update(@ModelAttribute Article model, @PathVariable Long id) {
+    public String update(@ModelAttribute @Valid Article model, @PathVariable Long id) {
         ArticleDto article = articleApp.getArticle(id);
         article.setContent(model.getContent());
         articleApp.saveArticle(article);
@@ -80,6 +87,17 @@ public class ArticleViewController {
         comment.setArticle(new Article(article));           // move to service
         commentApp.saveComment(comment.convertDto());
         return "redirect:/articles/0";
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
+        System.out.println("Request: " + req.getRequestURL() + " raised " + ex);
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", ex);
+        mav.addObject("url", req.getRequestURL());
+        mav.setViewName("error");
+        return mav;
     }
 }
 

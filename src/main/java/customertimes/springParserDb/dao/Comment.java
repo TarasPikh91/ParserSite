@@ -1,9 +1,11 @@
 package customertimes.springParserDb.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import customertimes.springParserDb.dto.CommentDto;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "comment")
@@ -14,6 +16,8 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @NotNull
+    @Min(10)
     @Column(name = "comment_text")
     private String content;
 

@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class TodayNews {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "site_key")
