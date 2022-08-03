@@ -1,25 +1,19 @@
-FROM openjdk:11.0.1
+# AS <NAME> to name this stage as maven
+FROM maven:3.6.3 AS maven
 
-WORKDIR /app
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+# Compile and package the application to an executable JAR
+RUN mvn package
 
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
+# For Java 11,
+FROM openjdk:11
 
-COPY src ./src
+ARG JAR_FILE=springParserDb-0.0.1-SNAPSHOT.jar
 
-CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=postgres"]
+WORKDIR /opt/app
 
-#FROM jenkins/jenkins:2.303.2-jdk11
-#USER root
-#RUN apt-get update && apt-get install -y apt-transport-https \
-#       ca-certificates curl gnupg2 \
-#       software-properties-common
-#RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-#RUN apt-key fingerprint 0EBFCD88
-#RUN add-apt-repository \
-#       "deb [arch=amd64] https://download.docker.com/linux/debian \
-#       $(lsb_release -cs) stable"
-#RUN apt-get update && apt-get install -y docker-ce-cli
-#USER jenkins
-#RUN jenkins-plugin-cli --plugins "blueocean:1.25.0 docker-workflow:1.26"
+# Copy the spring-boot-api-tutorial.jar from the maven stage to the /opt/app directory of the current stage.
+COPY --from=maven /usr/src/app/target/${JAR_FILE} /opt/app/
+
+ENTRYPOINT ["java","-jar","springParserDb-0.0.1-SNAPSHOT.jar"]
